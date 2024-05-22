@@ -40,7 +40,9 @@ You need to install Required packages in `package.json`
 
 OR 
 
-You can send requests to => https://documenter.getpostman.com/view/26450615/2sA3Qnjafw
+You can send requests to => https://qwasar-backend-my-api.onrender.com
+
+And docs of API stored here => https://documenter.getpostman.com/view/26450615/2sA3Qnjafw
 
 ## Usage
 
