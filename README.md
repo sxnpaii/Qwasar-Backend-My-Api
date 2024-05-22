@@ -38,6 +38,10 @@ When you use an application on your mobile phone, the application connects to th
 ## Installation
 You need to install Required packages in `package.json`
 
+OR 
+
+You can send requests to => https://documenter.getpostman.com/view/26450615/2sA3Qnjafw
+
 ## Usage
 
 ## End-point: Admin Checks user info
