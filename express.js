@@ -24,18 +24,19 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-// routes
+// routes earthquakes
 app.get("/", getEarthquake);
 app.put("/update/:id", updateEarthquake);
 app.delete("/delete/:id", deleteEarthquake);
 app.post("/post", postEarthquake);
+// users
 app.get("/home/:id", getUser);
 app.get("/admin", getAllUsersAdmin);
-app.get("/users/:userId/edit", getAndEditUserInfo);
 app.get("/user/:id/profile", getUserProfile);
+app.get("/users/:userId/edit", getAndEditUserInfo);
+app.post("/users/:userId/edit", editUserRole);
 app.post("/signup", SignUp);
 app.post("/login", Login);
-app.post("/users/:userId/edit", editUserRole);
 app.delete("/users/:userId/delete", deleteUser);
 
 app.listen(PORT, () => {

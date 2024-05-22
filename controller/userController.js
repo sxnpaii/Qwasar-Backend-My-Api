@@ -13,7 +13,7 @@ const getUser = async (req, res, next) => {
 };
 
 const getUserProfile = async (req, res, next) => {
-  const userId = req.user.userId;
+  const userId = req.params.id;
   try {
     const result = await pool.query(`SELECT * FROM users WHERE id = $1`, [
       userId,
@@ -32,7 +32,7 @@ const getUserProfile = async (req, res, next) => {
 
 const getAllUsersAdmin = async (req, res, next) => {
   try {
-    const { rows } = await pool.query(`SELECT * FROM users WHERE role = true`);
+    const { rows } = await pool.query(`SELECT * FROM users `);
 
     res.status(200).json(rows);
   } catch (error) {
@@ -78,10 +78,11 @@ const deleteUser = async (req, res, next) => {
   const userId = req.params.userId;
   try {
     await pool.query(`DELETE FROM users WHERE id = $1`, [userId]);
-    res.redirect("/users");
+    res.status(200).json({ message: "User successfully deleted" });
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");
+    // should redirect user to login or other page
   }
   next();
 };
