@@ -1,9 +1,11 @@
 const { pool } = require("../models/db.js");
 
-const getUser = async ({ query }, res, next) => {
+const getUser = async (req, res, next) => {
   try {
-    const { rows } = pool.query(`SELECT * FROM users WHERE id = ${query.id}`);
-    res.status(200).json("main page", { user: rows[0].username });
+    const { rows } = await pool.query(
+      `SELECT * FROM users WHERE id = ${req.params.id}`
+    );
+    res.status(200).json({ user: rows[0].username });
   } catch (error) {
     console.error(error);
   }
@@ -19,7 +21,7 @@ const getUserProfile = async (req, res, next) => {
     const user = result.rows[0];
     if (!user) {
       return res.status(404).send("User not found");
-    } 
+    }
     res.status(200).json(user);
   } catch (error) {
     console.error(error.message);
@@ -30,7 +32,8 @@ const getUserProfile = async (req, res, next) => {
 
 const getAllUsersAdmin = async (req, res, next) => {
   try {
-    const { rows } = await pool.query(`SELECT * FROM users`);
+    const { rows } = await pool.query(`SELECT * FROM users WHERE role = true`);
+
     res.status(200).json(rows);
   } catch (error) {
     console.error("Error retrieving data from the database", error);
@@ -46,7 +49,10 @@ const getAndEditUserInfo = async (req, res, next) => {
       `SELECT * FROM users WHERE id = ${userId}`
     );
 
-    res.status(200).json("edit users information", rows[0]);
+    res.status(200).json({
+      message: "edit users information",
+      user: rows[0],
+    });
   } catch (error) {
     console.error(error);
   }
@@ -60,7 +66,7 @@ const editUserRole = async (req, res, next) => {
       role,
       userId,
     ]);
-    res.status(200).json("User's role edited successfully");
+    res.status(200).json({ message: "User's role edited successfully" });
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");

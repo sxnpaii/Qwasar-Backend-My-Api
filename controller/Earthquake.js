@@ -8,7 +8,7 @@ const getEarthquake = async (req, res, next) => {
     console.error("Error retrieving data from the database", error);
     res.status(500).send({ error: "Internal Server Error" });
   }
-  next()
+  next();
 };
 
 const updateEarthquake = async (req, res, next) => {
@@ -51,7 +51,7 @@ const updateEarthquake = async (req, res, next) => {
     console.error("Error updating data in the database", error);
     res.status(500).send({ error: "Internal Server Error" });
   }
-  next()
+  next();
 };
 
 const deleteEarthquake = async (req, res, next) => {
@@ -63,7 +63,7 @@ const deleteEarthquake = async (req, res, next) => {
     console.error("Error deleting data from the database", error);
     res.status(500).send({ error: "Internal Server Error" });
   }
-  next()
+  next();
 };
 const postEarthquake = async (req, res, next) => {
   const {
@@ -86,7 +86,7 @@ const postEarthquake = async (req, res, next) => {
     console.error("Error inserting data:", error.message);
     res.status(500).send("Error inserting data");
   }
-  next()
+  next();
 };
 module.exports = {
   getEarthquake,
